@@ -25,6 +25,14 @@
         }
       tr:hover {background-color: coral;}
 
+      .green{
+        color:green;
+      }
+
+      .red{
+        color:red;
+      }
+
     </style>
 
 </head>
@@ -54,10 +62,12 @@
           showcode;
         }
         echo<<<total
+        <tfoot>
           <tr>
             <th>Total_Salary</th>
             <th>$Total_salary</th>
           </tr>
+        </tfoot>
         total;
 
 
@@ -65,8 +75,53 @@
       
     </tbody>
   </table>
+<hr>
+<!-- Example 2-->
+<?php
+  $student=array('Abdallah','Mohamed','Lotfy','Samy','Hesham','Ziad','Mahmoud','Sameer','Atef');
+  $english=array(44,33,22,15,16,18,19,44,50);
+  $math=array(32,33,20,15,16,18,20,40,20);
+  $science=array(44,30,22,15,12,18,144,44,50);
+  $arabic=array(44,33,22,15,16,18,19,44,50);
+  ?>
 
+  <table>
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Arabic</th>
+        <th>English</th>
+        <th>Math</th>
+        <th>Science</th>
+        <th>Total</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      for($i=0,$length=count($student);$i<$length;$i++){
+        $total=0;
+        $total=$arabic[$i]+$english[$i]+$math[$i]+$science[$i];
+        $htmlelement=$total>100? "<span class='green'>Sucsses</span>":"<span class='red'>Failed</span>";
+        echo "
+        <tr>
+          <td>{$student[$i]}</td>
+          <td>{$arabic[$i]}</td>
+          <td>{$english[$i]}</td>
+          <td>{$math[$i]}</td>
+          <td>{$science[$i]}</td>
+          <td>{$total}</td>
+          <td>$htmlelement</td>
+         
+     </tr>
+        ";
+      }
+      ?>
 
+    </tbody>
+  </table>
+
+ 
 
 
 
