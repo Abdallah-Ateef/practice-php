@@ -1,3 +1,5 @@
+<?php namespace MyNamespace;?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +52,7 @@
     </thead>
     <tbody>
     <?php
+   
         $employees=array('Abdallah','Mohamed','Lotfy','Samy','Hesham','Ziad','Mahmoud','Sameer','Atef');
 
         $Salaries=array(3000,3500,2000,4000,3200,4300,1333,6000,5000);
@@ -218,6 +221,8 @@
       protected $subjects=array('Arabic'=>0,'English'=>0,'Math'=>0,'Science'=>0);
       protected $minscore=150;
       protected $maxscore=300;
+        const minage=10;
+        const maxage=20;
 
       
 
@@ -248,7 +253,7 @@
      private function setage($age){
       $age=filter_var($age,FILTER_SANITIZE_NUMBER_INT);
      
-      if($age<12 || $age>20){
+      if($age<static::minage || $age>static::maxage){
         throw new Exception('sorry age must be bettwen 12 and 20');
       }else $this->age=$age;
      }
@@ -270,6 +275,10 @@
      }
      function getmaxscore() {
       return $this->maxscore;
+     }
+
+     function getminage(){
+      return static::minage;
      }
 
      function setsubjectscore($subject,$value){
@@ -296,6 +305,7 @@
     class gradstudent extends students{
       private $Activity;
 
+
       function __construct($name,$age)
       {
         parent::__construct($name,$age);
@@ -317,17 +327,99 @@
     }
 
 
-  $grade1=new gradstudent('Abdallah',16);
+  $grade1=new gradstudent('Abdallah',15);
   echo $grade1->getminscore() .'<br>';
   echo $grade1->getmaxscore() .'<br>';
   $grade1->setsubjectscore('Arabic',33);
 
   echo $grade1->getsubjectgrade('Arabic');
-  echo '<pre>';
   
-  echo '</pre>';
+  echo 'Minmaum age of '.$grade1->getname() .'is ==->>'.$grade1->getminage();
 
-   
+  //abstract classes and interfaces;
+
+   abstract class employee{
+    //general Information
+    public $name;
+    public $age;
+    public $salary;
+  }
+
+  class manager extends employee{
+
+  }
+
+  class worker extends employee{
+
+  }
+
+  class supervisor extends employee{
+
+  }
+
+  //use traits
+
+  trait msg{
+    public $name1='abdallah';
+    public static function showmsg(){
+      
+      echo "this is  an example of trait";
+    }
+  }
+
+  class memy{
+    use msg;
+  }
+
+  $objm=new memy;
+  $objm->showmsg();
+
+
+  //magic methods ///
+
+  class magic{
+    public $name;
+    private $age;
+
+    public function __set($name, $value)
+    {
+      echo "Cant acces $name";
+    }
+
+    public function __get($name)
+    {
+      echo "enta klap epn kalp";
+    }
+  }
+
+  echo "<br>";
+
+  $mj=new magic;
+  $mj->age=33;
+  echo $mj->abdo;
+  echo "<pre>";
+  var_dump($mj);
+  echo "</pre>";
+
+
+  echo "<br>****************************************************************** <br>";
+
+ // Define a namespace
+
+
+// Define a class within the namespace
+class MyClass {
+    public function sayHello() {
+        echo "Hello from MyClass!";
+    }
+}
+
+// Using the class from the namespace
+$object = new MyClass();
+$object->sayHello();
+
+
+
  
 
 
